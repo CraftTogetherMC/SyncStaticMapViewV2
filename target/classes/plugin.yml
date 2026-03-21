@@ -1,5 +1,5 @@
 name: SyncStaticMapView
-version: ${project.version}
+version: 5.0.0-1.21.11
 main: de.crafttogether.syncstaticmapview.code.MapIndex
 api-version: 1.13
 authors: [stondragonlp]
