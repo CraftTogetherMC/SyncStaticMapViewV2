@@ -33,8 +33,8 @@ public final class MapIndex extends JavaPlugin {
 
         try {
             String bukkitVersion = Bukkit.getBukkitVersion();
-            if (!bukkitVersion.startsWith("1.21")) {
-                throw new IllegalArgumentException("This rebuild targets Paper 1.21.x only. Detected: " + bukkitVersion);
+            if (!isSupportedVersion(bukkitVersion)) {
+                throw new IllegalArgumentException("This rebuild targets Paper 1.21.x / 26.x+ only. Detected: " + bukkitVersion);
             }
 
             branchMapColor = new Branch_21_MapColor();
@@ -62,6 +62,19 @@ public final class MapIndex extends JavaPlugin {
         } catch (Exception exception) {
             exception.printStackTrace();
             throw new NullPointerException("onEnable error");
+        }
+    }
+
+    private static boolean isSupportedVersion(String bukkitVersion) {
+        if (bukkitVersion.startsWith("1.21")) {
+            return true;
+        }
+        // New versioning scheme since 26.1 (e.g. "26.2.build.2609-stable")
+        try {
+            int major = Integer.parseInt(bukkitVersion.split("\\.", 2)[0]);
+            return major >= 26;
+        } catch (NumberFormatException exception) {
+            return false;
         }
     }
 
