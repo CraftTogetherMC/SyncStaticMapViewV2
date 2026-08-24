@@ -61,7 +61,7 @@ public final class MapIndex extends JavaPlugin {
             }
         } catch (Exception exception) {
             exception.printStackTrace();
-            throw new NullPointerException("onEnable error");
+            throw new RuntimeException("onEnable error", exception);
         }
     }
 
